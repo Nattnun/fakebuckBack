@@ -1,0 +1,23 @@
+### Authentication ###
+POST /auth/register register a new user
+REQUEST BODY
+{
+    firstName*          string  user first name
+    lastname*           string  user last name
+    emailOrMobile*      string  email address of mobile number
+    password*           string  password must contain 6 character only alphabet
+    confirmPassword*    string  confirm password must match a password
+}
+RESPONSE
+201
+{
+    accessToken         string  user token
+}
+400
+{
+    message             string  Client error message
+}
+500
+{
+    message             string  server error message
+}

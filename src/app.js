@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error");
 const notFoundMiddleware = require("./middlewares/not-found");
+const authRoute = require("./routes/auth-route");
 
 const limiter = require("./middlewares/rate-limit");
 
@@ -13,6 +14,8 @@ app.use(cors());
 app.use(express.json()); //convert data to json object
 app.use(limiter); // limit amount of request
 app.use(morgan("combined")); //morgan will log time and method of request and response
+
+app.use("/auth", authRoute);
 
 // notfound and error handler
 app.use(notFoundMiddleware);
