@@ -9,12 +9,13 @@ exports.register = catchError(async (req, res, next) => {
     req.body.email || req.body.mobile
   );
   if (existsUser) {
-    createError("email address od mobile number is already in use", 400);
+    createError("EMAIL_MOBILE_IN_USE", 400);
   }
   req.body.password = await hashService.hash(req.body.password);
   const newUser = await userService.createUser(req.body);
   const payload = { userId: newUser.id };
   const accessToken = jwtService.sign(payload);
+  delete newUser.password;
 
-  res.status(201).json({ accessToken });
+  res.status(201).json({ accessToken, newUser });
 });

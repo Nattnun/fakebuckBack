@@ -3,7 +3,7 @@ POST /auth/register register a new user
 REQUEST BODY
 {
     firstName*          string  user first name
-    lastname*           string  user last name
+    lastName*           string  user last name
     emailOrMobile*      string  email address of mobile number
     password*           string  password must contain 6 character only alphabet
     confirmPassword*    string  confirm password must match a password
@@ -12,6 +12,7 @@ RESPONSE
 201
 {
     accessToken         string  user token
+    newUser             object  user object without password
 }
 400
 {
