@@ -47,9 +47,9 @@ GET /auth/me            get     Authenticated user data
 HEADER
     AUTHORIZATION       Bearer [JWT]
 RESPONSE
-200 {user: {id, firstName, lastName, email, mobile, profileImage, coverImage, createdAt, updatedAt}}
-401 {message: 'unauthenticated'}
-500 {message: 'internal server error'}
+    200 {user: {id, firstName, lastName, email, mobile, profileImage, coverImage, createdAt, updatedAt}}
+    401 {message: 'unauthenticated'}
+    500 {message: 'internal server error'}
 
 
 PATCH /users            update user profileImage
@@ -59,10 +59,19 @@ REQUEST BODY            multipart/form-data
     profileImage?       user profile image
     coverImage?         user cover image
 RESPONSE
-200 { profileImage: 'http://', coverImage: 'http://'}
-400 { message: 'unexpected field'}
-401 { message: 'unauthenticated'}
-500 { message: 'internal server error'}
+    200 { profileImage: 'http://', coverImage: 'http://'}
+    400 { message: 'unexpected field'}
+    401 { message: 'unauthenticated'}
+    500 { message: 'internal server error'}
+
+GET/users/:targetUserId/profile
+HEADER
+        AUTHORIZATION       Bearer [JWT]
+RESPONSE
+    200 { profileUser,profileUserFriends,relationship}
+    400 { message: 'unexpected field'}  
+    401 { message: 'unauthenticated'}
+    500 { message: 'internal server error'}       
 
 POST    /relationships/users/:targetUserId              request new friend
 PATCH   /relationships/users/:targetUserId/confirm      accept friend   (only receiver can accept)
@@ -72,8 +81,8 @@ PATCH   /relationships/users/:targetUserId/unfriend     unfriend
 HEADER
         AUTHORIZATION       Bearer [JWT]
 RESPONSE
-200 { message: 'success request'}
-400 { message: 'invalid relationships between two user'}
-401 { message: 'unauthenticated'}
-403 { message: 'cannot accept your request'}
-500 { message: 'internal server error'}
+    200 { message: 'success request'}
+    400 { message: 'invalid relationships between two user'}
+    401 { message: 'unauthenticated'}
+    403 { message: 'cannot accept your request'}
+    500 { message: 'internal server error'}
