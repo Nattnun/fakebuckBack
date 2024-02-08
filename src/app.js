@@ -6,6 +6,7 @@ const errorMiddleware = require("./middlewares/error");
 const notFoundMiddleware = require("./middlewares/not-found");
 const authRoute = require("./routes/auth-route");
 const userRoute = require("./routes/user-route");
+const relationshipsRoute = require("./routes/relationship-route");
 
 const limiter = require("./middlewares/rate-limit");
 const authenticate = require("./middlewares/authenticate");
@@ -20,6 +21,7 @@ app.use("/public", express.static("public"));
 
 app.use("/auth", authRoute);
 app.use("/users", authenticate, userRoute);
+app.use("/relationships", authenticate, relationshipsRoute);
 
 // notfound and error handler
 app.use(notFoundMiddleware);
